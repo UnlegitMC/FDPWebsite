@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>FDPClient By Liuli</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1><font size="5"><a>FDP</a>Client</font></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="http://dl.liulihaocai.pw/fdp-release.jar" class="button">Download</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<h2>FDPClient</h2>
+					<p>A client that can enhance your personal gaming experience in redesky.</p>
+					<ul class="actions special">
+						<li><a href="http://dl.liulihaocai.pw/fdp-release.jar" class="button primary">Download</a></li>
+						<li><a href="https://github.com/Project-EZ4H/FDPClient" class="button">Github</a></li>
+					</ul>
+				</section>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<section class="box special features">
+						<div class="features-row">
+							<section>
+								<span class="icon solid major fa-bolt accent2"></span>
+								<h3>Bypass</h3>
+								<p>With powerful bypass, you can beat other hackers easily.</p>
+							</section>
+							<section>
+								<span class="icon solid major fa-chart-area accent3"></span>
+								<h3>Pretty UI</h3>
+								<p>Just enjoy hacking times.</p>
+							</section>
+						</div>
+						<div class="features-row">
+							<section>
+								<span class="icon solid major fa-cloud accent4"></span>
+								<h3>Users</h3>
+								<p>FDPClient is chosen by many hackers! Now <font id="count" size="6" color="#EE6363">loading</font> hackers are using it.</p>
+							</section>
+							<section>
+								<span class="icon solid major fa-lock accent5"></span>
+								<h3>Secure</h3>
+								<p>No backdoor, no data collection.</p>
+							</section>
+						</div>
+					</section>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="copyright">
+						<li>FDPClient by Liuli</li><li>Web Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+	var element=document.getElementById("count");
+	$.get("https://bstats.org/api/v1/plugins/11076/charts/servers/data",function(data,status){
+		try{
+			element.innerHTML=data[data.length-1][1]
+			element.color="	#00CD66"
+		}catch(e){
+			element.innerHTML="ERROR"
+			console.error(e)
+		}
+    });
+			</script>
+	</body>
+</html>
