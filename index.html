@@ -19,7 +19,8 @@
 					<h1><font size="5"><a>FDP</a>Client</font></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="http://dl.liulihaocai.pw/fdp-release.jar" class="button">Download</a></li>
+							<li><a href="https://github.com/Project-EZ4H/FDPClient" class="button">Github</a></li>
+							<li><a href="#dl-page" class="button">Download</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -29,7 +30,7 @@
 					<h2>FDPClient</h2>
 					<p>A client that can enhance your personal gaming experience in redesky.</p>
 					<ul class="actions special">
-						<li><a href="http://dl.liulihaocai.pw/fdp-release.jar" class="button primary">Download</a></li>
+						<li><a href="#dl-page" class="button primary">Download</a></li>
 						<li><a href="https://github.com/Project-EZ4H/FDPClient" class="button">Github</a></li>
 					</ul>
 				</section>
@@ -62,12 +63,34 @@
 							</section>
 						</div>
 					</section>
+
+					<div class="row" id="dl-page">
+						<div class="col-6 col-12-narrower">
+							<section class="box special">
+								<h3>Client</h3>
+								<p>Version: <font id="version">loading</font></p>
+								<ul class="actions special">
+									<li><a href="http://dl.liulihaocai.pw/fdp-release.jar" class="button alt">Download</a></li>
+								</ul>
+							</section>
+						</div>
+						<div class="col-6 col-12-narrower">
+							<section class="box special">
+								<h3>Config</h3>
+								<p>Offical config for FDPClient</p>
+								<ul class="actions special">
+									<li><a href="http://dl.liulihaocai.pw/fdp-config.zip" class="button alt">Download</a></li>
+								</ul>
+							</section>
+						</div>
+					</div>
+
 				</section>
 
 			<!-- Footer -->
 				<footer id="footer">
 					<ul class="copyright">
-						<li>Host by <a href="https://idc.nqynet.cn/">NQYCloud</a></li>
+						<li>Host by <a href="https://idc.nqynet.cn/">NQCloud</a></li>
 						<br/>
 						<br/>
 						<li>FDPClient by Liuli</li><li>Web Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -85,13 +108,24 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-	var element=document.getElementById("count");
+	var countElement=document.getElementById("count");
 	$.get("https://bstats.org/api/v1/plugins/11076/charts/servers/data",function(data,status){
 		try{
-			element.innerHTML=data[data.length-1][1]
-			element.color="	#00CD66"
+			countElement.innerHTML=data[data.length-1][1]
+			countElement.color="#00CD66"
 		}catch(e){
-			element.innerHTML="ERROR"
+			countElement.innerHTML="error"
+			console.error(e)
+		}
+    });
+
+	var versionElement=document.getElementById("version");
+	$.get("http://dl.liulihaocai.pw/fdp-ver.php",function(data,status){
+		try{
+			var json=JSON.parse(data)
+			versionElement.innerHTML=json.version
+		}catch(e){
+			versionElement.innerHTML="error"
 			console.error(e)
 		}
     });
