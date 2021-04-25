@@ -9,6 +9,7 @@
 		<title>FDPClient By Liuli</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="landing is-preload">
@@ -70,7 +71,7 @@
 								<h3>Client</h3>
 								<p>Version: <font id="version">loading</font></p>
 								<ul class="actions special">
-									<li><a href="http://dl.liulihaocai.pw/fdp-release.jar" class="button alt">Download</a></li>
+									<li><a href="https://dl.liulihaocai.pw/fdp-release.jar" class="button alt">Download</a></li>
 								</ul>
 							</section>
 						</div>
@@ -79,7 +80,7 @@
 								<h3>Config</h3>
 								<p>Offical config for FDPClient</p>
 								<ul class="actions special">
-									<li><a href="http://dl.liulihaocai.pw/fdp-config.zip" class="button alt">Download</a></li>
+									<li><a href="https://dl.liulihaocai.pw/fdp-config.zip" class="button alt">Download</a></li>
 								</ul>
 							</section>
 						</div>
@@ -120,7 +121,7 @@
     });
 
 	var versionElement=document.getElementById("version");
-	$.get("http://dl.liulihaocai.pw/fdp-ver.php",function(data,status){
+	$.get("https://dl.liulihaocai.pw/fdp-ver.php",function(data,status){
 		try{
 			var json=JSON.parse(data)
 			versionElement.innerHTML=json.version
