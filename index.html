@@ -68,7 +68,7 @@
 						<div class="col-6 col-12-narrower">
 							<section class="box special">
 								<h3>Client</h3>
-								<p>FDP Client File</p>
+								<p>Version: <font id="version">loading</font></p>
 								<ul class="actions special">
 									<li><a href="http://fdp.unaux.com/fdp-release.jar" class="button alt">Download</a></li>
 								</ul>
@@ -112,6 +112,15 @@
 			countElement.color="#00CD66"
 		}catch(e){
 			countElement.innerHTML="error"
+			console.error(e)
+		}
+    });
+	var versionElement=document.getElementById("version");
+	$.get("https://fdp.liulihaocai.workers.dev/",function(data,status){
+		try{
+			versionElement.innerHTML=data.version
+		}catch(e){
+			versionElement.innerHTML="error"
 			console.error(e)
 		}
     });
