@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	</head>
 	<body class="landing is-preload">
 		<div id="page-wrapper">
@@ -19,7 +20,7 @@
 					<h1><font size="5"><a>FDP</a>Client</font></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="https://github.com/Project-EZ4H/FDPClient" class="button">Github</a></li>
+							<li><a href="https://discord.gg/dJtjF7swH9" class="button">Discord</a></li>
 							<li><a href="#dl-page" class="button">Download</a></li>
 						</ul>
 					</nav>
@@ -70,7 +71,7 @@
 								<h3>Client</h3>
 								<p>Version: <font id="version">loading</font></p>
 								<ul class="actions special">
-									<li><a href="https://liulihaocai.github.io/storage/fdp-client.jar" class="button alt">Download</a></li>
+									<li><a onclick="reqDL(false)" class="button alt">Download</a></li>
 								</ul>
 							</section>
 						</div>
@@ -79,11 +80,22 @@
 								<h3>Config</h3>
 								<p>Offical config for FDPClient</p>
 								<ul class="actions special">
-									<li><a href="https://liulihaocai.github.io/storage/fdp-config.zip" class="button alt">Download</a></li>
+									<li><a onclick="reqDL(true)" class="button alt">Download</a></li>
 								</ul>
 							</section>
 						</div>
 					</div>
+
+				</section>
+
+				<section id="cta">
+
+					<h2>Want talk?</h2>
+					<p>Join us discord server!</p>
+
+					<ul class="actions special">
+						<li><a href="https://discord.gg/dJtjF7swH9" class="button primary"><font style="color:black">Join it</font></a></li>
+					</ul>
 
 				</section>
 
@@ -105,6 +117,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
+	var isChina=false //github got blocked by GFW lmao
 	var countElement=document.getElementById("count");
 	$.get("https://bstats.org/api/v1/plugins/11076/charts/servers/data",function(data,status){
 		try{
@@ -124,6 +137,39 @@
 			console.error(e)
 		}
     });
+	$.get("http://ip-api.com/json?fields=countryCode",function(data,status){
+		if(data.countryCode=="CN"){
+			isChina=true
+		}
+	});
+
+	function reqDL(isConfig){
+		swal("Download "+(isConfig?"Config":"Client"),"Select download mirror", {
+ 			buttons: {
+    			github: {
+      				text: "Github.io"+(isChina?"(May Blocked)":""),
+      				value: "gh",
+    			},
+				fastgit: {
+					text: "FastGit"+(isChina?"(Faster)":"(May Slow)"),
+					value: "fastgit"
+				}
+			}
+		})
+		.then((value)=>{
+			switch(value){
+				case "gh": 
+					window.location.href="https://liulihaocai.github.io/storage/fdp-"+(isConfig?"config":"client")+".jar"
+					break;
+				case "fastgit": 
+					window.location.href="https://hub.fastgit.org/liulihaocai/storage/raw/main/fdp-"+(isConfig?"config":"client")+".jar"
+					break;
+				// default: 
+				// 	swal("Error", "something happened (value="+value+", isConfig="+isConfig+", isChina="+isChina+")", "error");
+				// 	break;
+			}
+		})
+	}
 			</script>
 	</body>
 </html>
