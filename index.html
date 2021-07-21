@@ -154,8 +154,8 @@
 			console.error(e)
 		}
     });
-	$.get("http://ip-api.com/json?fields=countryCode",function(data,status){
-		if(data.countryCode=="CN"){
+	$.get("https://ipapi.co/json",function(data,status){
+		if(data.country_code=="CN"){
 			isChina=true
 		}
 	});

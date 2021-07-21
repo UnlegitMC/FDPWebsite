@@ -9,15 +9,16 @@ var json=
       {text:"[+] INSANE RedeSky Velocity",color:{rainbow:"SKY",rainbow_index:0,alpha:160}}
     ]
 };
-var jsonStr=JSON.stringify(json)
-
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })
 
+var url="https://fdp.liulihaocai.workers.dev/"
+
 async function handleRequest(request) {
-  return new Response(jsonStr, {
+  var path="/"+request.url.split(url)[1]
+  return new Response(JSON.stringify(json), {
         status: 200,
         headers: {
           "content-type": "text/json;charset=UTF-8",
