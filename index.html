@@ -146,9 +146,11 @@
 		}
     });
 	var versionElement=document.getElementById("version");
+	var version=null;
 	$.get("https://fdp.liulihaocai.workers.dev/",function(data,status){
 		try{
 			versionElement.innerHTML=data.version
+			version=data.version
 		}catch(e){
 			versionElement.innerHTML="error"
 			console.error(e)
@@ -161,6 +163,10 @@
 	});
 
 	function reqDL(isConfig){
+		if(version==null){
+			swal ( "Oops" ,  "Failed to fetch version data!" ,  "error" )
+			return
+		}
 		swal("Download "+(isConfig?"Config":"Client"),"Select download mirror", {
  			buttons: {
     			github: {
@@ -176,10 +182,10 @@
 		.then((value)=>{
 			switch(value){
 				case "gh": 
-					window.location.href="https://liulihaocai.github.io/storage/fdp-"+(isConfig?"config.zip":"client.jar")
+					window.location.href="https://github.com/UnlegitMC/FDPClient/releases/download/"+version+"/"+(isConfig?"config.zip":"FDPClient-v1.jar")
 					break;
 				case "fastgit": 
-					window.location.href="https://hub.fastgit.org/liulihaocai/storage/raw/main/fdp-"+(isConfig?"config.zip":"client.jar")
+					window.location.href="https://hub.fastgit.org/UnlegitMC/FDPClient/releases/download/"+version+"/"+(isConfig?"config.zip":"FDPClient-v1.jar")
 					break;
 				// default: 
 				// 	swal("Error", "something happened (value="+value+", isConfig="+isConfig+", isChina="+isChina+")", "error");
