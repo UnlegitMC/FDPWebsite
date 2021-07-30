@@ -374,7 +374,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" id="version-info">Version: loading...</li>
                 </ul>
-                <a href="#" class="btn">Download</a>
+                <a onclick="dl(true)" class="btn">Download</a>
               </div>
             </div>
           </div>
@@ -393,7 +393,7 @@
                 <ul class="list-group">
                   <li class="list-group-item">Bypass Redesky, Verus</li>
                 </ul>
-                <a href="#" class="btn">Download</a>
+                <a onclick="dl(true)" class="btn">Download</a>
               </div>
             </div>
           </div>
@@ -493,8 +493,49 @@
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="lib/isotope/isotope.pkgd.min.js"></script>
   <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/swal/swal.min.js"></script>
   <!-- Contact Form JavaScript File -->
   <script src="./js/info.js"></script>
+  <script>
+    function dl(isClient){
+      if(version==null){
+			  swal ( "Oops" ,  "Failed to fetch version data!" ,  "error" )
+			  return
+		  }
+		  swal("Download "+(isClient?"Client":"Config"),"Select download mirror", {
+ 			  buttons: {
+    	  	github: {
+        			text: "Github",
+        			value: "gh",
+    	  	},
+			  	fastgit: {
+			  		text: "FastGit",
+			  		value: "fastgit"
+			  	},
+			  	yunloli: {
+			  		text: "YunLoli",
+			  		value: "yunloli"
+			  	}
+			  }
+		  })
+		  .then((value)=>{
+		  	switch(value){
+		  		case "gh": 
+		  			window.location.href="https://github.com/UnlegitMC/FDPClient/releases/download/"+version+"/"+(isClient?"FDPClient-v1.jar":"config.zip")
+		  			break;
+		  		case "fastgit": 
+		  			window.location.href="https://hub.fastgit.org/UnlegitMC/FDPClient/releases/download/"+version+"/"+(isClient?"FDPClient-v1.jar":"config.zip")
+		  			break;
+          case "yunloli":
+            swal("Error", "This mirror not supported now!", "error");
+            break;
+		  		// default: 
+		  		// 	swal("Error", "something happened (value="+value+", isConfig="+isConfig+", isChina="+isChina+")", "error");
+		  		// 	break;
+			}
+		})
+	}
+  </script>
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>

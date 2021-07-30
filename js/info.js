@@ -1,3 +1,5 @@
+var version=null
+
 $.get("https://fdp.liulihaocai.workers.dev/",function(data,status){
     var versionElement=document.getElementById("version-info")
     try{
@@ -23,4 +25,3 @@ $.get("https://api.github.com/repos/UnlegitMC/FDPClient/contributors",function(d
     var element=document.getElementById("contributors-info")
     element.innerHTML=data.length
 });
-
