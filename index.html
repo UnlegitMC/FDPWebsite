@@ -199,7 +199,7 @@
 
 
                     <div class="col-lg-3 col-6 text-center">
-                        <span data-toggle="counter-up">41700</span>
+                        <span data-toggle="counter-up" id="lines-of-code-info">-1</span>
                         <p>Lines of code</p>
                     </div>
                 </div>
@@ -399,7 +399,7 @@
                                     Config
                                 </h4>
                                 <ul class="list-group">
-                                    <li class="list-group-item">Bypass Redesky, Verus</li>
+                                    <li class="list-group-item">Bypass Some Servers</li>
                                 </ul>
                                 <a onclick="dl(false)" class="btn">Download</a>
                             </div>
@@ -533,6 +533,15 @@
 
         $.get("https://api.github.com/repos/UnlegitMC/FDPClient/contributors", function(data, status) {
             $("#contributors-info").html(data.length)
+        });
+
+        $.get("https://api.github.com/repos/UnlegitMC/FDPClient/languages", function(data, status) {
+            dat = data
+            var count = 0
+            Object.keys(data).forEach(element => {
+                count += data[element]
+            });
+            $("#lines-of-code-info").html(count)
         });
 
         function dl(isClient) {
