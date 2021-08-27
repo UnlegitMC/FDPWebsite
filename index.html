@@ -510,7 +510,7 @@
     <script>
         function dl(isClient) {
             if (version == null) {
-                swal("Oops", "Failed to fetch version data!", "error")
+                window.location.href = "https://github.com/UnlegitMC/FDPClient/releases/latest"
                 return
             }
             swal("Download " + (isClient ? "Client" : "Config"), "Select download mirror", {
