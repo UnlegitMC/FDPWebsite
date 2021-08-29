@@ -555,16 +555,24 @@
                             text: "Github",
                             value: "gh",
                         },
-                        fastgit: {
-                            text: "FastGit",
-                            value: "fastgit"
-                        }
+                        ghproxy: {
+                            text: "GHProxy",
+                            value: "ghproxy"
+                        },
+                        // fastgit: {
+                        //     text: "FastGit",
+                        //     value: "fastgit"
+                        // }
                     }
                 })
                 .then((value) => {
+                    var gh_url = "https://github.com/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-v1.jar" : "config.zip")
                     switch (value) {
                         case "gh":
-                            window.location.href = "https://github.com/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-v1.jar" : "config.zip")
+                            window.location.href = gh_url;
+                            break;
+                        case "ghproxy":
+                            window.location.href = "https://ghproxy.com/" + gh_url;
                             break;
                         case "fastgit":
                             window.location.href = "https://hub.fastgit.org/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-v1.jar" : "config.zip")
