@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Home - FDPClient</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Google Fonts -->
@@ -442,17 +443,17 @@
                     </li>
 
                     <li>
-                        <a data-toggle="collapse" href="#faq3" class="collapsed">Why my config can't be saved?<i class="ion-android-remove"></i></a>
-                        <div id="faq3" class="collapse" data-parent="#faq-list">
+                        <a data-toggle="collapse" href="#faq4" class="collapsed">My client keep crashing with new UI / I dont like the new ui design<i class="ion-android-remove"></i></a>
+                        <div id="faq4" class="collapse" data-parent="#faq-list">
                             <p>
-                                Try delete values.json,modules.json and macros.json, it may delete failed after config update convert.
+                                Add JVM argument -Dfdp-legacy-ui to use the old ui design
                             </p>
                         </div>
                     </li>
 
                     <li>
-                        <a data-toggle="collapse" href="#faq4" class="collapsed">My problem not in this list<i class="ion-android-remove"></i></a>
-                        <div id="faq4" class="collapse" data-parent="#faq-list">
+                        <a data-toggle="collapse" href="#faq5" class="collapsed">My problem not in this list<i class="ion-android-remove"></i></a>
+                        <div id="faq5" class="collapse" data-parent="#faq-list">
                             <p>
                                 Create a issue <a style="font-size:large;" href="https://github.com/UnlegitMC/FDPClient/issues/new/choose">here</a> to let us know.
                             </p>
@@ -535,14 +536,18 @@
             $("#contributors-info").html(data.length)
         });
 
-        $.get("https://api.github.com/repos/UnlegitMC/FDPClient/languages", function(data, status) {
-            dat = data
-            var count = 0
-            Object.keys(data).forEach(element => {
-                count += data[element]
-            });
-            $("#lines-of-code-info").html(count)
-        });
+        function codeLineCount() {
+            var source = new EventSource("https://line-count.herokuapp.com/unlegitmc/fdpclient/114514");
+            source.addEventListener('results', function(e) {
+                var count = 0
+                $.each(JSON.parse(e.data), function(key, value) {
+                    count += value.lines
+                });
+                $("#lines-of-code-info").html(count)
+                source.close()
+            })
+        }
+        codeLineCount()
 
         function dl(isClient) {
             if (version == null) {
