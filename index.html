@@ -200,8 +200,8 @@
 
 
                     <div class="col-lg-3 col-6 text-center">
-                        <span data-toggle="counter-up" id="lines-of-code-info">-1</span>
-                        <p>Lines of code</p>
+                        <span data-toggle="counter-up" id="download-times-info">-1</span>
+                        <p>Latest version download times</p>
                     </div>
                 </div>
 
@@ -512,12 +512,14 @@
 
         $.get("https://api.github.com/repos/UnlegitMC/FDPClient/releases/latest", function(data, status) {
             try {
+                $("#version-info").html("Version: " + data.tag_name)
+                version = data.tag_name
+
                 var times = 0
                 data.assets.forEach(element => {
                     times += element.download_count
                 });
-                $("#version-info").html("Version: " + data.tag_name + " DLTimes: " + times)
-                version = data.tag_name
+                $("#download-times-info").html(times)
             } catch (e) {
                 $("#version-info").html("Version: fetch error")
                 console.error(e)
@@ -536,19 +538,6 @@
             $("#contributors-info").html(data.length)
         });
 
-        function codeLineCount() {
-            var source = new EventSource("https://line-count.herokuapp.com/unlegitmc/fdpclient/114514");
-            source.addEventListener('results', function(e) {
-                var count = 0
-                $.each(JSON.parse(e.data), function(key, value) {
-                    count += value.lines
-                });
-                $("#lines-of-code-info").html(count)
-                source.close()
-            })
-        }
-        codeLineCount()
-
         function dl(isClient) {
             if (version == null) {
                 window.location.href = "https://github.com/UnlegitMC/FDPClient/releases/latest"
@@ -564,14 +553,14 @@
                             text: "GHProxy",
                             value: "ghproxy"
                         },
-                        // fastgit: {
-                        //     text: "FastGit",
-                        //     value: "fastgit"
-                        // }
+                        fastgit: {
+                            text: "FastGit",
+                            value: "fastgit"
+                        }
                     }
                 })
                 .then((value) => {
-                    var gh_url = "https://github.com/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-v1.jar" : "config.zip")
+                    var gh_url = "https://github.com/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-2.0.0.jar" : "config.zip")
                     switch (value) {
                         case "gh":
                             window.location.href = gh_url;
@@ -580,7 +569,7 @@
                             window.location.href = "https://ghproxy.com/" + gh_url;
                             break;
                         case "fastgit":
-                            window.location.href = "https://hub.fastgit.org/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-v1.jar" : "config.zip")
+                            window.location.href = gh_url.replace("github.com", "hub.fastgit.org")
                             break;
                     }
                 })
