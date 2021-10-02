@@ -4,16 +4,39 @@
 
 <head>
     <meta charset="utf-8">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+      integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+      integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+      crossorigin="anonymous"
+    ></script>
     <title>Beta - FDPClient</title>
 </head>
 
-<body>
-    <div style="color: red;">
-        DOWNLOAD LATEST BUILD AT YOUR OWN RISK!<br/> IT MAY UNSTABLE!
-    </div>
+<body style="background: rgba(230,230,230)">
     <br/>
-    <div>
-        <table>
+    <br/>
+    <div class="mdui-container">
+        <div class="mdui-card mdui-hoverable">
+          <div class="mdui-card-media" style="overflow: hidden;height: 400px;">
+            <img src="http://api.xgstudio.xyz"/>
+            <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+              <div class="mdui-card-primary" style="text-align: center;">
+                <div class="mdui-card-primary-title">FDP Client</div>
+                <div class="mdui-card-primary-subtitle">Bate Version</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="mdui-container">
+            <table class="mdui-table mdui-hoverable">
             <thead>
                 <tr>
                     <th>Commit</th>
@@ -25,9 +48,10 @@
             <tbody id="tbody">
             </tbody>
         </table>
+        </div>
     </div>
     <div style="color: green;font-size:xx-large;text-align: center;" id="loading-badge">
-        Loading...
+        <div class="mdui-spinner"></div>
     </div>
 
     <!-- JavaScript Libraries -->
@@ -35,6 +59,25 @@
     <script src="lib/jquery/jquery-migrate.min.js"></script>
 
     <script>
+        setTimeout(function(){
+            mdui.dialog({
+              title: 'Warning',
+              history: false,
+              content: ' DOWNLOAD LATEST BUILD AT YOUR OWN RISK!<br/> IT MAY UNSTABLE!',
+              buttons: [
+                {
+                  text: 'cancel'
+                },
+                {
+                  text: 'ok',
+                  onClick: function(inst){
+
+                  }
+                }
+              ]
+            });
+        },1000)
+        
         function addVer(link, sha, time, msg, comments_link) {
             $.get(comments_link, function(data, status) {
                 $('#loading-badge').html("");
