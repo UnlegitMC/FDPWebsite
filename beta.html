@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Beta - FDPClient</title>
+</head>
+
+<body>
+    <div style="color: red;">
+        DOWNLOAD LATEST BUILD AT YOUR OWN RISK!<br/> IT MAY UNSTABLE!
+    </div>
+    <br/>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Commit</th>
+                    <th>Date</th>
+                    <th>Commit Message</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+    <div style="color: green;font-size:xx-large;text-align: center;" id="loading-badge">
+        Loading...
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+
+    <script>
+        function addVer(link, sha, time, msg, comments_link) {
+            $.get(comments_link, function(data, status) {
+                $('#loading-badge').html("");
+
+                data.forEach(element => {
+                    if (element.user.type.toLowerCase() == "bot" && element.user.login.toLowerCase().includes("github-actions") && element.body.startsWith("https")) {
+                        $("#tbody").append('<tr><td><a href="' + link + '">' + sha.substring(0, 7) + '</a></td><td>' + time + '</td><td>' + msg + '</td><td><a href="' + element.body + '">Artifact</a></td></tr>')
+                        return
+                    }
+                })
+            })
+        }
+
+        $.get("https://api.github.com/repos/UnlegitMC/FDPClient/commits", function(data, status) {
+            data.forEach(element => {
+                if (element.commit.comment_count > 0) {
+                    addVer(element.html_url, element.sha, new Date(element.commit.committer.date).toLocaleString(), element.commit.message, element.comments_url)
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
