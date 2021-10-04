@@ -6,10 +6,18 @@
     <meta charset="utf-8">
     <title>Beta - FDPClient</title>
 
+    <style>
+        .space {
+            height: 50px;
+        }
+        
+        .img {
+            transition: all 2s;
+        }
+    </style>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css" integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js" integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A" crossorigin="anonymous"></script>
-
-    <script data-ad-client="ca-pub-3855151070294060" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body style="background: rgba(230,230,230)">
@@ -18,7 +26,7 @@
     <div class="mdui-container">
         <div class="mdui-card mdui-hoverable">
             <div class="mdui-card-media" style="overflow: hidden;height: 400px;">
-                <img src="img/bg.jpg" />
+                <img src="img/blue.png" class="img" />
                 <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
                     <div class="mdui-card-primary" style="text-align: center;">
                         <div class="mdui-card-primary-title">FDP Client</div>
@@ -27,8 +35,7 @@
                 </div>
             </div>
         </div>
-        <br/>
-        <br/>
+        <div class="space"></div>
         <div class="mdui-container">
             <table class="mdui-table mdui-hoverable">
                 <thead>
@@ -44,7 +51,7 @@
             </table>
         </div>
     </div>
-    <div style="color: green;font-size:xx-large;text-align: center;" id="loading-badge">
+    <div class="space" style="color: green;font-size:xx-large;text-align: center;" id="loading-badge">
         <div class="mdui-spinner"></div>
     </div>
 
@@ -93,6 +100,21 @@
                 }
             });
         })
+
+        function fn3() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + ',' + g + ',' + b + ")";
+        }
+
+        // this seems not working
+        rainbow();
+
+        function rainbow() {
+            $(".img").css("filter", "brightness(1.1) drop-shadow(0 0 " + fn3() + ")");
+            setTimeout("rainbow();", 2000);
+        }
     </script>
 
     <!-- Yandex.Metrika counter -->
