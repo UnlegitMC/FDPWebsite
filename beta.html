@@ -62,23 +62,15 @@
     <script>
         var verJson = []
 
-        function addVer(link, sha, time, msg, comments_link) {
-            $.get(comments_link, function(data, status) {
-
-                data.forEach(element => {
-                    if (element.user.type.toLowerCase() == "bot" && element.user.login.toLowerCase().includes("github-actions") && element.body.startsWith("https")) {
-                        verJson.push({
-                            link: link,
-                            sha: sha,
-                            time: new Date(time),
-                            msg: msg,
-                            body: element.body
-                        })
-                        refresh()
-                        return
-                    }
-                })
+        function addVer(sha, time, msg, artifact_id) {
+            verJson.push({
+                link: "https://github.com/UnlegitMC/FDPClient/commit/" + sha,
+                sha: sha,
+                time: new Date(time),
+                msg: msg,
+                download_link: "https://nightly.link/UnlegitMC/FDPClient/actions/runs/" + artifact_id + "/FDPClient.zip"
             })
+            refresh()
         }
 
         function refresh() {
@@ -89,14 +81,14 @@
             }).sort(function(a, b) {
                 return -1 // this is a really stupid method right?
             }).forEach(element => {
-                $("#tbody").append('<tr><td><a href="' + element.link + '">' + element.sha.substring(0, 7) + '</a></td><td>' + element.time.toLocaleString() + '</td><td>' + element.msg + '</td><td><a href="' + element.body + '">Artifact</a></td></tr>')
+                $("#tbody").append('<tr><td><a href="' + element.link + '">' + element.sha.substring(0, 7) + '</a></td><td>' + element.time.toLocaleString() + '</td><td>' + element.msg + '</td><td><a href="' + element.download_link + '">Artifact</a></td></tr>')
             })
         }
 
-        $.get("https://api.github.com/repos/UnlegitMC/FDPClient/commits", function(data, status) {
-            data.forEach(element => {
-                if (element.commit.comment_count > 0) {
-                    addVer(element.html_url, element.sha, element.commit.committer.date, element.commit.message, element.comments_url)
+        $.get("https://api.github.com/repos/UnlegitMC/FDPClient/actions/runs", function(data, status) {
+            data.workflow_runs.forEach(element => {
+                if (element.name == 'build') {
+                    addVer(element.head_commit.id, element.head_commit.timestamp, element.head_commit.message, element.id)
                 }
             });
         })
