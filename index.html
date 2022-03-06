@@ -181,15 +181,14 @@
         <section id="why-us" class="wow fadeIn">
             <div class="container">
                 <div class="row counters">
-
-                    <div class="col-lg-3 col-6 text-center">
-                        <span data-toggle="counter-up" id="stars-info">-1</span>
-                        <p>Stars</p>
-                    </div>
-
                     <div class="col-lg-3 col-6 text-center">
                         <span data-toggle="counter-up" id="users-info">-1</span>
                         <p>Online users</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up" id="stars-info">-1</span>
+                        <p>Stargazers</p>
                     </div>
 
                     <div class="col-lg-3 col-6 text-center">
@@ -197,13 +196,11 @@
                         <p>Contributors</p>
                     </div>
 
-
                     <div class="col-lg-3 col-6 text-center">
-                        <span data-toggle="counter-up" id="download-times-info">-1</span>
-                        <p>Latest version download times</p>
+                        <span>GPL v3</span>
+                        <p>Open-Source License</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -372,6 +369,10 @@
 
                 <div class="row flex-items-xs-middle flex-items-xs-center">
 
+                  
+                  <div class="col-xs-12 col-lg-4">
+                  </div>
+
                     <!-- Basic Plan  -->
                     <div class="col-xs-12 col-lg-4">
                         <div class="card">
@@ -382,19 +383,14 @@
                                 <ul class="list-group">
                                     <li class="list-group-item" id="version-info">Version: loading...</li>
                                 </ul>
-                                <a onclick="dl(true)" class="btn">Release</a>
-                                <a href="eap.html" class="btn">EarlyAccess</a>
+                                <a href="download.html" class="btn">Download</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Regular Plan  -->
-                    <div class="col-xs-12 col-lg-4">
-                    </div>
-
                     <!-- Premium Plan  -->
-                    <div class="col-xs-12 col-lg-4">
-                        <div class="card">
+                    <!-- <div class="col-xs-12 col-lg-4"> -->
+                        <!-- <div class="card">
                             <div class="card-block">
                                 <h4 class="card-title">
                                     Config
@@ -404,8 +400,8 @@
                                 </ul>
                                 <a onclick="dl(false)" class="btn">Download</a>
                             </div>
-                        </div>
-                    </div>
+                        </div> -->
+                    <!-- </div> -->
 
                 </div>
             </div>
@@ -501,22 +497,6 @@
     <script>
         var version = null
 
-        $.get("https://api.github.com/repos/UnlegitMC/FDPClient/releases/latest", function(data, status) {
-            try {
-                $("#version-info").html("Version: " + data.tag_name)
-                version = data.tag_name
-
-                var times = 0
-                data.assets.forEach(element => {
-                    times += element.download_count
-                });
-                $("#download-times-info").html(times)
-            } catch (e) {
-                $("#version-info").html("Version: fetch error")
-                console.error(e)
-            }
-        });
-
         $.get("https://api.github.com/repos/UnlegitMC/FDPClient", function(data, status) {
             $("#stars-info").html(data.stargazers_count)
         });
@@ -528,43 +508,6 @@
         $.get("https://api.github.com/repos/UnlegitMC/FDPClient/contributors", function(data, status) {
             $("#contributors-info").html(data.length)
         });
-
-        function dl(isClient) {
-            if (version == null) {
-                window.location.href = "https://github.com/UnlegitMC/FDPClient/releases/latest"
-                return
-            }
-            swal("Download " + (isClient ? "Client" : "Config"), "Select download mirror", {
-                    buttons: {
-                        github: {
-                            text: "Github",
-                            value: "gh",
-                        },
-                        ghproxy: {
-                            text: "GHProxy",
-                            value: "ghproxy"
-                        },
-                        fastgit: {
-                            text: "FastGit",
-                            value: "fastgit"
-                        }
-                    }
-                })
-                .then((value) => {
-                    var gh_url = "https://github.com/UnlegitMC/FDPClient/releases/download/" + version + "/" + (isClient ? "FDPClient-2.0.0.jar" : "config.zip")
-                    switch (value) {
-                        case "gh":
-                            window.location.href = gh_url;
-                            break;
-                        case "ghproxy":
-                            window.location.href = "https://ghproxy.com/" + gh_url;
-                            break;
-                        case "fastgit":
-                            window.location.href = gh_url.replace("github.com", "hub.fastgit.org")
-                            break;
-                    }
-                })
-        }
     </script>
 
     <!-- Template Main Javascript File -->
