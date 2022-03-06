@@ -41,6 +41,7 @@
                 <thead>
                     <tr>
                         <th>Commit</th>
+                        <th>Branch</th>
                         <th>Date</th>
                         <th>Commit Message</th>
                         <th>Download</th>
@@ -62,13 +63,17 @@
     <script>
         var verJson = []
 
-        function addVer(sha, time, msg, artifact_id) {
+        function addVer(sha, time, msg, artifact_id, branch) {
+            if(branch == "main") {
+                branch = "stable"
+            }
             verJson.push({
                 link: "https://github.com/UnlegitMC/FDPClient/commit/" + sha,
                 sha: sha,
                 time: new Date(time),
                 msg: msg,
-                download_link: "https://nightly.link/UnlegitMC/FDPClient/actions/runs/" + artifact_id + "/FDPClient.zip"
+                download_link: "https://nightly.link/UnlegitMC/FDPClient/actions/runs/" + artifact_id + "/FDPClient.zip",
+                branch: branch
             })
             refresh()
         }
@@ -81,14 +86,14 @@
             }).sort(function(a, b) {
                 return -1 // this is a really stupid method right?
             }).forEach(element => {
-                $("#tbody").append('<tr><td><a href="' + element.link + '">' + element.sha.substring(0, 7) + '</a></td><td>' + element.time.toLocaleString() + '</td><td>' + element.msg + '</td><td><a href="' + element.download_link + '">Artifact</a></td></tr>')
+                $("#tbody").append('<tr><td><a href="' + element.link + '">' + element.sha.substring(0, 7) + '</a></td><td>' + element.branch + '</td><td>' + element.time.toLocaleString() + '</td><td>' + element.msg + '</td><td><a href="' + element.download_link + '">Artifact</a></td></tr>')
             })
         }
 
         $.get("https://api.github.com/repos/UnlegitMC/FDPClient/actions/runs", function(data, status) {
             data.workflow_runs.forEach(element => {
                 if (element.name == 'build') {
-                    addVer(element.head_commit.id, element.head_commit.timestamp, element.head_commit.message, element.id)
+                    addVer(element.head_commit.id, element.head_commit.timestamp, element.head_commit.message, element.id, element.head_branch)
                 }
             });
         })
@@ -108,28 +113,5 @@
             setTimeout("rainbow();", 2000);
         }
     </script>
-
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(m, e, t, r, i, k, a) {
-            m[i] = m[i] || function() {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
-            m[i].l = 1 * new Date();
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(84028663, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/84028663" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
 </body>
-
 </html>
