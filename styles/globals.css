@@ -2,19 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+.text-gradient {
+  background: -webkit-linear-gradient(315deg,#43ff8b, #0064fa);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.heartcolor {
+  animation: heartcolor-anim 1s infinite;
 }
 
-* {
-  box-sizing: border-box;
+@keyframes heartcolor-anim {
+  0% { color: hsl(--pc); }
+  20% { color: #ff0000; }
+  100% { color: hsl(--pc); }
 }
