@@ -4,7 +4,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'minecraft-1': "url('/images/minecraft-1.png')",
+      }
+    },
   },
   plugins: [
     require('daisyui'),

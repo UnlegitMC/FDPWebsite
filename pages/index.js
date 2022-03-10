@@ -9,15 +9,17 @@ export default function MainPage() {
         <title>Home - FDPClient</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <img src="/steve-with-sword.png" alt="Steve holding a sword" className="absolute right-10" draggable="false" />
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content text-center bg-base-100 backdrop-blur bg-opacity-50">
+      <div className="hero bg-minecraft-1">
+        <div className='hero min-h-screen bg-base-200 backdrop-blur bg-opacity-30'>
+          <img src="/images/steve-with-sword.png" alt="Steve holding a sword" className="absolute right-10 top-10" draggable="false" />
+        </div>
+        <div className="hero-content text-center bg-base-100 backdrop-blur bg-opacity-50 rounded-xl px-28 py-7">
           <div className="max-w-md">
             <h1 className="text-6xl font-bold text-gradient">FDP Client</h1>
             <div className="py-6 text-2xl">
               <Typewriter
                 options={{
-                  strings: ['Best Minecraft 1.8.9 hacked client', 'Free and open-source', 'Fast and lightweight', 'By UnlegitMC Team'],
+                  strings: ['Best Minecraft 1.8.9 hacked client', 'Free and open-source', 'Fast and lightweight'],
                   autoStart: true,
                   loop: true
                 }}
