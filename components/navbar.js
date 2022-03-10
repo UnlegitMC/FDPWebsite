@@ -2,13 +2,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import globals from '../components/globals'
 import Link from 'next/link'
 
 export default function Navbar() {
     return (
         <div>
-            <div className="navbar fixed bg-base-100 border-b">
+            <div className="navbar bg-base-100 shadow bg-opacity-90 border-b fixed top-0 z-50 backdrop-blur-xl">
                 <div className="navbar-start">
                     <a className="btn no-animation btn-ghost normal-case text-xl text-gradient">FDP Client</a>
                 </div>
@@ -25,12 +26,12 @@ export default function Navbar() {
                     </ul>
                 </div>
             </div>
-            <div className="navbar bg-base-100">
+            <div className="navbar">
                 {/* placeholder */}
             </div>
             <p className="navbar mx-auto menu-horizonal space-x-3 border-b">
                 &nbsp;&nbsp;&nbsp;<FontAwesomeIcon icon={faCircleInfo} />
-                <span>UnlegitMC Team stands with Ukraine! 🇺🇦</span>
+                <span>🇺🇦 UnlegitMC Team stands with Ukraine! &nbsp; <FontAwesomeIcon icon={faHeart} className="text-blue-500" /> <FontAwesomeIcon icon={faHeart} className="text-yellow-500" /></span>
                 <button className='font-semibold absolute right-10 text-2xl' onClick={closeUkAlert}>
                     <span>x</span>
                 </button>
