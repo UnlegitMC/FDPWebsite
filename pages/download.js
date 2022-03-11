@@ -14,7 +14,7 @@ export default function MainPage() {
                 <title>Download - FDPClient</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <section class="py-1 bg-base-200 min-h-screen">
+            <section className="py-1 bg-base-200 min-h-screen">
                 {ghInfo()}
             </section>
         </div>
@@ -81,24 +81,24 @@ function ghInfo() {
     runs.forEach((run) => {
         tables.push((
             <tr>
-                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
                     <a href={"https://github.com/UnlegitMC/FDPClient/tree/" + run.branch}>{run.branch}</a>
                 </th>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     <div className="tooltip" data-tip={"Workflow ID: " + run.run_id}>
                         <a href={"https://github.com/UnlegitMC/FDPClient/commit/" + run.commit_id}>{run.commit_id.substring(0, 7)}</a>
                     </div>
                 </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {run.time}
                 </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     <a href={run.author_url}>{run.author}</a>
                 </td>
-                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {run.message}
                 </td>
-                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {getRunStatus(run)}
                 </td>
             </tr>
@@ -106,36 +106,36 @@ function ghInfo() {
     })
 
     return (
-        <div class="w-full xl:w-10/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
-            <div class="relative flex flex-col min-w-0 break-words bg-primary-content w-full mb-6 shadow-lg rounded">
-                <div class="rounded-t mb-0 px-4 py-3 border-0">
-                    <div class="flex flex-wrap items-center">
-                        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-neutral">Downloads</h3>
+        <div className="w-full xl:w-10/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
+            <div className="relative flex flex-col min-w-0 break-words bg-primary-content w-full mb-6 shadow-lg rounded">
+                <div className="rounded-t mb-0 px-4 py-3 border-0">
+                    <div className="flex flex-wrap items-center">
+                        <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                            <h3 className="font-semibold text-base text-neutral">Downloads</h3>
                         </div>
                     </div>
                 </div>
 
-                <div class="block w-full overflow-x-auto">
-                    <table class="items-center bg-transparent w-full border-collapse ">
+                <div className="block w-full overflow-x-auto">
+                    <table className="items-center bg-transparent w-full border-collapse ">
                         <thead>
                             <tr>
-                                <th class="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Branch
                                 </th>
-                                <th class="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Commit
                                 </th>
-                                <th class="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Date
                                 </th>
-                                <th class="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Author
                                 </th>
-                                <th class="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Message
                                 </th>
-                                <th class="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-6 bg-base-50 text-base-content align-middle border border-solid border-base-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Download
                                 </th>
                             </tr>
