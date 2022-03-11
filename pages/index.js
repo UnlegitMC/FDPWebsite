@@ -1,6 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Typewriter from 'typewriter-effect'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotate } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import useSWR from 'swr'
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function MainPage() {
   return (
@@ -29,12 +35,39 @@ export default function MainPage() {
           </div>
         </div>
       </div>
-
-      <div className="hero min-h-screen bg-base-200" id="content">
+      <div className="hero min-h-screen bg-base-200 border-b">
         <div className="hero-content text-center">
-          <h1 className="text-6xl font-bold text-gradient">Content</h1>
+          <div className="max-w-md">
+            <h1 className="text-5xl font-bold text-gradient">Popular!</h1>
+            <p className="py-6 text-xl">We have a big open-source community!
+            And FDP Client are able to load LiquidBounce scripts, we are LiquidBased.
+            Now {loadUserCount()} users are using FDP Client</p>
+          </div>
         </div>
       </div>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <iframe src="https://discord.com/widget?id=899275378760245278&theme=dark" width="350" height="500" allowtransparency="true" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+          <div>
+            <h1 className="text-5xl font-bold text-gradient">Chat!</h1>
+            <p className="py-6 text-xl">Join our discord server and chat with our friendly community!</p>
+            <button className="btn btn-primary">Join Now!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function loadUserCount() {
+  const { data, error } = useSWR('https://bstats.org/api/v1/plugins/11076/charts/servers/data', fetcher)
+
+  if (error) return (<div className="tooltip text-error" data-tip="Failed to load :("><FontAwesomeIcon icon={faExclamationTriangle} /></div>)
+  if (!data) return (<div className="tooltip" data-tip="Loading..."><FontAwesomeIcon icon={faRotate} className="animate-spin" /></div>)
+
+  return (
+    <div className="tooltip text-info" data-tip={"Fetched on " + new Date()}>
+      {data[data.length - 1][1]}
     </div>
   )
 }

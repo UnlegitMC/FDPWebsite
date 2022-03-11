@@ -1,12 +1,35 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import globals from '../components/globals'
 import Link from 'next/link'
+import { ToastProvider, useToasts } from 'react-toast-notifications'
+import { useEffect } from 'react'
+
+var toastPoped = toastPoped || false
+var toastProcessed = toastProcessed || false
+var toastFunc = () => { console.error("illegal state: this function should not be called") }
+
+const FormWithToasts = () => {
+    if (!toastPoped) {
+        const { addToast } = useToasts()
+
+        toastFunc = () => {
+            toastPoped = true
+            addToast((<a href='https://supportukrainenow.org/'>🇺🇦 UnlegitMC Team stands with Ukraine! And you?</a>), { appearance: 'info', autoDismiss: false });
+        }
+    }
+
+    return (<p></p>)
+};
 
 export default function Navbar() {
+    useEffect(() => {
+        if (!toastProcessed) {
+            toastFunc()
+        }
+        toastProcessed = true
+    })
     return (
         <div>
             <div className="navbar bg-base-100 shadow bg-opacity-90 border-b fixed top-0 z-50 backdrop-blur-xl">
@@ -21,29 +44,14 @@ export default function Navbar() {
                 </div>
                 <div className="navbar-end">
                     <ul className="menu menu-horizontal p-0">
-                        <li><a href={globals.repo_url}><FontAwesomeIcon icon={faGithub} />GitHub</a></li>
+                        <li><a href={globals.repo_url}><FontAwesomeIcon icon={faGithub}/>GitHub</a></li>
                         <li><a href={globals.discord}><FontAwesomeIcon icon={faDiscord}/>Discord</a></li>
                     </ul>
                 </div>
             </div>
-            <div className="navbar">
-                {/* placeholder */}
-            </div>
-            <p className="navbar mx-auto menu-horizonal space-x-3 border-b">
-                &nbsp;&nbsp;&nbsp;<FontAwesomeIcon icon={faCircleInfo} />
-                <span>🇺🇦 UnlegitMC Team stands with Ukraine! &nbsp; <FontAwesomeIcon icon={faHeart} className="text-blue-500" /> <FontAwesomeIcon icon={faHeart} className="text-yellow-500" /></span>
-                <button className='font-semibold absolute right-10 text-2xl' onClick={closeUkAlert}>
-                    <span>x</span>
-                </button>
-            </p>
+            <ToastProvider>
+                <FormWithToasts />
+            </ToastProvider>
         </div>
     )
-}
-
-function closeUkAlert(event) {
-    let element = event.target;
-    while (element.nodeName !== "BUTTON") {
-        element = element.parentNode;
-    }
-    element.parentNode.parentNode.removeChild(element.parentNode);
 }
