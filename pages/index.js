@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Typewriter from 'typewriter-effect'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotate } from '@fortawesome/free-solid-svg-icons'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import useSWR from 'swr'
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+import utils from "../components/utils"
 
 export default function MainPage() {
   return (
@@ -31,7 +29,7 @@ export default function MainPage() {
                 }}
               />
             </div>
-            <Link href='#content'><a className="btn btn-primary">Get Started</a></Link>
+            <Link href='/download'><a className="btn btn-primary">Download Now</a></Link>
           </div>
         </div>
       </div>
@@ -60,13 +58,13 @@ export default function MainPage() {
 }
 
 function loadUserCount() {
-  const { data, error } = useSWR('https://bstats.org/api/v1/plugins/11076/charts/servers/data', fetcher)
+  const { data, error } = useSWR('https://bstats.org/api/v1/plugins/11076/charts/servers/data', utils.fetcher)
 
-  if (error) return (<div className="tooltip text-error" data-tip="Failed to load :("><FontAwesomeIcon icon={faExclamationTriangle} /></div>)
-  if (!data) return (<div className="tooltip" data-tip="Loading..."><FontAwesomeIcon icon={faRotate} className="animate-spin" /></div>)
+  if (error) return utils.alert(faExclamationTriangle, "Failed to load :(")
+  if (!data) return utils.alert(faRotate, "Loading...", "animate-spin")
 
   return (
-    <div className="tooltip text-info" data-tip={"Fetched on " + new Date()}>
+    <div className="tooltip text-info" data-tip={"Fetched on " + new Date().toLocaleString() }>
       {data[data.length - 1][1]}
     </div>
   )
