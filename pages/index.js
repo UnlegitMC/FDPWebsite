@@ -43,6 +43,16 @@ export default function MainPage() {
           </div>
         </div>
       </div>
+      <div className="hero min-h-screen bg-base-200 border-b">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-5xl font-bold text-gradient">Localized!</h1>
+            <p className="py-6 text-xl">FDP Client is LOCALIZED!<br/>
+            You can hack with FDP Client on your local language.</p>
+            <a href="https://translate.getfdp.today" className="btn btn-primary">Help us translate</a>
+          </div>
+        </div>
+      </div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <iframe src="https://discord.com/widget?id=899275378760245278&theme=dark" width="350" height="500" allowtransparency="true" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>

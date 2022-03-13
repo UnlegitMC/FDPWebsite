@@ -4,6 +4,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons'
 import { faRotate } from '@fortawesome/free-solid-svg-icons'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import utils from "../components/utils"
 import useSWR from 'swr'
 
@@ -60,6 +61,12 @@ function ghInfo() {
             return (
                 <div className="tooltip" data-tip={tooltip}>
                     <a href={run.run_url}><FontAwesomeIcon icon={faStopwatch} className="text-warning"></FontAwesomeIcon></a>
+                </div>
+            )
+        } else if (run.conclusion == "cancelled") {
+            return (
+                <div className="tooltip" data-tip={tooltip}>
+                    <a href={run.run_url}><FontAwesomeIcon icon={faTrashCan} className="text-error"></FontAwesomeIcon></a>
                 </div>
             )
         } else if(run.conclusion != "success") {
