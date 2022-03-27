@@ -57,7 +57,7 @@ export default function Navbar() {
             })
         }
         var cn =((navigator.language || navigator.browserLanguage).toLowerCase());
-        if((cn.indexOf('zh')!=-1) || (times.indexOf("中国")!=-1 || times.indexOf("China")!=-1  || times.indexOf("GMT+0800")!=-1) && window.location.host != "cn.getfdp.today")
+        if((cn.indexOf('zh')!=-1) || (times.indexOf("中国")!=-1) && window.location.host != "cn.getfdp.today")
         {
             console.log("正在检查节点是否可用...");
             loadScript("https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js",function(){
