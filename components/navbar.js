@@ -29,6 +29,53 @@ export default function Navbar() {
             toastFunc()
         }
         toastProcessed = true
+
+        // 给墙内用户加载js，以便过滤内容
+        function loadScript(src, callback) {
+            var script = document.createElement('script'),
+                head = document.getElementsByTagName('head')[0];
+            script.type = 'text/javascript';
+            // script.charset = 'UTF-8';
+            script.src = src;
+            if (script.addEventListener) {
+                script.addEventListener('load', function () {
+                    callback();
+                }, false);
+            } else if (script.attachEvent) {
+                script.attachEvent('onreadystatechange', function () {
+                    var target = window.event.srcElement;
+                    if (target.readyState == 'loaded') {
+                        callback();
+                    }
+                });
+            }
+            head.appendChild(script);
+        }
+        if(window.location.host == "cn.getfdp.today") {
+            loadScript("https://xgcdn.getfdp.today/fdpweb.js?time="+new Date().getTime(), function() {
+                console.log("I LOVE XIJINPING!")
+            })
+        }
+        var cn =((navigator.language || navigator.browserLanguage).toLowerCase());
+        if((cn.indexOf('zh')!=-1) || (times.indexOf("中国")!=-1 || times.indexOf("China")!=-1  || times.indexOf("GMT+0800")!=-1) && window.location.host != "cn.getfdp.today")
+        {
+            console.log("正在检查节点是否可用...");
+            loadScript("https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js",function(){
+                $.get("https://xgcdn.getfdp.today/getcode.php?time="+new Date().getTime(),function (a) {
+                    var code=JSON.parse(a);
+                    console.log(code);
+                    if(code.code){
+                        console.log("鉴定结果: 中国人       + 30,000,000 Social Credit");
+                        window.location.href="https://cn.getfdp.today/";
+                    }else{
+                        console.log("鉴定结果: 中国人 但是可能有点问题，要跑路咯");
+                        window.location.href=code.href;
+                    }
+                }).error(function(){
+                        console.log("节点异常!已保留原网页!");
+                });
+            });
+        }
     })
     return (
         <div>
