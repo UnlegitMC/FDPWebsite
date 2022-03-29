@@ -38,8 +38,8 @@ export default function MainPage() {
           <div className="max-w-md">
             <h1 className="text-5xl font-bold text-gradient">Popular!</h1>
             <p className="py-6 text-xl">We have a big open-source community!
-            And FDP Client are able to load LiquidBounce scripts, we are LiquidBased.
-            Now {loadUserCount()} users are using FDP Client</p>
+             FDP Client is able to load LiquidBounce scripts, we are LiquidBased!
+            Currently {loadUserCount()} users are using FDP Client</p>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function MainPage() {
           <div className="max-w-md">
             <h1 className="text-5xl font-bold text-gradient">Localized!</h1>
             <p className="py-6 text-xl">FDP Client is LOCALIZED!<br/>
-            You can hack with FDP Client on your local language.</p>
+            You can hack with FDP Client using your local language.</p>
             <a href="https://translate.getfdp.today" className="btn btn-primary">Help us translate</a>
           </div>
         </div>
